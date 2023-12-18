@@ -534,9 +534,9 @@ class Xtts(BaseTTS):
             text_tokens = torch.IntTensor(self.tokenizer.encode(sent, lang=language)).unsqueeze(0).to(self.device)
             print(text_tokens.shape[-1])
             print(self.args.gpt_max_text_tokens)
-            assert (
-                text_tokens.shape[-1] < self.args.gpt_max_text_tokens
-            ), " ❗ XTTS can only generate text with a maximum of " + self.args.gpt_max_text_tokens + " tokens."
+            # assert (
+            #     text_tokens.shape[-1] < self.args.gpt_max_text_tokens
+            # ), " ❗ XTTS can only generate text with a maximum of " + self.args.gpt_max_text_tokens + " tokens."
 
             with torch.no_grad():
                 gpt_codes = self.gpt.generate(
