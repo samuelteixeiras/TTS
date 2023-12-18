@@ -266,7 +266,7 @@ class TortoiseArgs(Coqpit):
 
     # UnifiedVoice params
     ar_max_mel_tokens: int = 604
-    ar_max_text_tokens: int = 402
+    ar_max_text_tokens: int = 4000 # change limit
     ar_max_conditioning_inputs: int = 2
     ar_layers: int = 30
     ar_model_dim: int = 1024
