@@ -161,7 +161,7 @@ class XttsArgs(Coqpit):
     # XTTS GPT Encoder params
     tokenizer_file: str = ""
     gpt_max_audio_tokens: int = 605
-    gpt_max_text_tokens: int = 402
+    gpt_max_text_tokens: int = 4000
     gpt_max_prompt_tokens: int = 70
     gpt_layers: int = 30
     gpt_n_model_channels: int = 1024
@@ -532,10 +532,11 @@ class Xtts(BaseTTS):
         for sent in text:
             sent = sent.strip().lower()
             text_tokens = torch.IntTensor(self.tokenizer.encode(sent, lang=language)).unsqueeze(0).to(self.device)
-
+            print(text_tokens.shape[-1])
+            print(self.args.gpt_max_text_tokens)
             assert (
                 text_tokens.shape[-1] < self.args.gpt_max_text_tokens
-            ), " ❗ XTTS can only generate text with a maximum of 400 tokens."
+            ), " ❗ XTTS can only generate text with a maximum of " + self.args.gpt_max_text_tokens + " tokens."
 
             with torch.no_grad():
                 gpt_codes = self.gpt.generate(
